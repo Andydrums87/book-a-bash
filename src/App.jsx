@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { HashRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import Blog from "./pages/Blog"
 import BlogDetailPage from "./pages/BlogDetail"
@@ -9,7 +9,7 @@ import Nav from "./components/Nav"
 const App = () => {
 
   return (
-  <BrowserRouter>
+  <HashRouter>
   <Nav />
    <Routes>
     <Route path="/" element={<Home />} />
@@ -17,7 +17,7 @@ const App = () => {
     <Route path="/blog/:id" element={<BlogDetailPage />} />
    </Routes>
    <Footer />
-  </BrowserRouter>
+  </HashRouter>
   )
 }
 

@@ -195,11 +195,10 @@ const Blog = () => {
                       </div>
                       <h3 className="text-xl font-bold text-[#2F2F2F] mb-2 line-clamp-2">{post.title}</h3>
                       <p className="text-[#707070] mb-4 line-clamp-3">{post.excerpt}</p>
-                      <a
-                        href={`/blog/${post.id}`}
-                        className="inline-flex items-center text-[#FC6B57] font-medium hover:underline"
-                      >
-                        Read more
+                     
+<Link to={`/blog/${post.id}`} className="text-[#FC6B57] hover:underline">
+  Read more
+
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 ml-1"
@@ -212,7 +211,7 @@ const Blog = () => {
                             clipRule="evenodd"
                           />
                         </svg>
-                      </a>
+                        </Link>
                     </div>
                   </div>
                 ))
