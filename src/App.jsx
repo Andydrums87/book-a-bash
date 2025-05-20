@@ -97,7 +97,7 @@ const App = () => {
           <img
             src="colorful-childrens-party.png"
             alt="Children celebrating at a colorful birthday party with cake and balloons"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover md:object-center object-right-top"
           />
         </div>
 
