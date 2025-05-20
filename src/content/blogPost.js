@@ -125,6 +125,11 @@ export const allPosts = [
       image: "/blog-post-2.png",
       category: "Budget",
       date: "May 10, 2025",
+      author: {
+        name: "Andrew Joseph",
+        role: "Party Planning Expert",
+        image: "/andrew.jpg",
+      },
       readTime: "6 min read",
     },
     {
@@ -135,6 +140,11 @@ export const allPosts = [
       image: "/blog-post-3.png",
       category: "Themes",
       date: "May 5, 2025",
+      author: {
+        name: "Andrew Joseph",
+        role: "Party Planning Expert",
+        image: "/andrew.jpg",
+      },
       readTime: "7 min read",
     },
     {
@@ -145,6 +155,26 @@ export const allPosts = [
       image: "/images/blog-post-5.png",
       category: "Planning",
       date: "April 22, 2025",
+      author: {
+        name: "Andrew Joseph",
+        role: "Party Planning Expert",
+        image: "/andrew.jpg",
+      },
       readTime: "4 min read",
-    },
+    },   
+    {
+        id: 6,
+        title: "Healthy Party Food Options That Kids Actually Love",
+        excerpt:
+          "Nutritious and delicious party food ideas that will keep both kids and parents happy at your next celebration.",
+        image: "/blog-post-6.png",
+        category: "Food",
+        date: "April 15, 2025",
+        author: {
+            name: "Andrew Joseph",
+            role: "Party Planning Expert",
+            image: "/andrew.jpg",
+          },
+        readTime: "5 min read",
+      },
   ];

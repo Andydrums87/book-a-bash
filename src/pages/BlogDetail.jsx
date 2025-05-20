@@ -18,7 +18,7 @@ const BlogDetailPage = () => {
   return (
     <div className="min-h-screen bg-[#FDFDFB]">
       {/* Breadcrumbs */}
-      <div className="bg-white border-b border-gray-100">
+      <div className="bg-white border-b border-gray-100 relative z-200">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center text-sm text-[#707070]">
             <Link to="/" className="hover:text-[#FC6B57] transition-colors">

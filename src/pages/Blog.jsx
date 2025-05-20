@@ -67,7 +67,7 @@ const Blog = () => {
       title: "Healthy Party Food Options That Kids Actually Love",
       excerpt:
         "Nutritious and delicious party food ideas that will keep both kids and parents happy at your next celebration.",
-      image: "/images/blog-post-6.png",
+      image: "/blog-post-6.png",
       category: "Food",
       date: "April 15, 2025",
       readTime: "5 min read",
@@ -196,7 +196,7 @@ const Blog = () => {
                       <h3 className="text-xl font-bold text-[#2F2F2F] mb-2 line-clamp-2">{post.title}</h3>
                       <p className="text-[#707070] mb-4 line-clamp-3">{post.excerpt}</p>
                      
-<Link to={`/blog/${post.id}`} className="text-[#FC6B57] hover:underline">
+<Link to={`/blog/${post.id}`} className="text-[#FC6B57] flex items-center hover:underline">
   Read more
 
                         <svg

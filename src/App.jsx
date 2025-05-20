@@ -10,8 +10,9 @@ const App = () => {
 
   return (
   <HashRouter>
-  <Nav />
+   <Nav />
    <Routes>
+
     <Route path="/" element={<Home />} />
     <Route path="/Blog" element={<Blog />} />
     <Route path="/blog/:id" element={<BlogDetailPage />} />

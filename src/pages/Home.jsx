@@ -34,12 +34,14 @@ const Home = () => {
     }
   ]
 
+  
+
   return (
     <div className="min-h-screen bg-[#FDFDFB] overflow-hidden relative">
       {/* Hero Section */}
       <section className="relative py-12 md:py-20">
         {/* Hero Background */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <div className="absolute inset-0 w-full h-full overflow-hidden z-10">
           <div className="absolute inset-0 bg-gradient-to-r from-[#FC6B57]/40 to-[#FC6B57]/30"></div>
           <img
             src="colorful-childrens-party.png"
