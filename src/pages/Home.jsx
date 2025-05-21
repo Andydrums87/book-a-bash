@@ -5,6 +5,9 @@ const Home = () => {
   const [postcode, setPostcode] = useState("")
   const [budget, setBudget] = useState(200)
   const [activeTestimonial, setActiveTestimonial] = useState(0)
+  const [registerEmail, setRegisterEmail] = useState("")
+  const [registered, setRegistered] = useState(false)
+  const [activeTab, setActiveTab] = useState("customer") 
 
   const testimonials = [
     {
@@ -33,26 +36,54 @@ const Home = () => {
       rating: 5
     }
   ]
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault()
+    // In a real implementation, this would send the email to a backend service
+    console.log("Registered email:", registerEmail)
+    setRegistered(true)
+    // Reset form after 5 seconds
+    setTimeout(() => {
+      setRegistered(false)
+      setRegisterEmail("")
+    }, 5000)
+  }
 
-  
 
   return (
     <div className="min-h-screen bg-[#FDFDFB] overflow-hidden relative">
-      {/* Hero Section */}
-      <section className="relative py-12 md:py-20">
+     
+  {/* Hero Section */}
+  <section className="relative py-12 md:py-16">
         {/* Hero Background */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden z-10">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FC6B57]/40 to-[#FC6B57]/30"></div>
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
           <img
-            src="colorful-childrens-party.png"
-            alt="Children celebrating at a colorful birthday party with cake and balloons"
-            className="w-full h-full object-cover md:object-center object-right-top"
+            src="/colorful-childrens-party.png"
+            alt="Colorful children's party with balloons and streamers"
+            className="w-full h-full object-cover"
           />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white/90 backdrop-blur-sm p-8 md:p-12 rounded-lg shadow-xl">
+        {/* Semi-transparent overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FC6B57]/30 to-[#FC6B57]/30 z-10"></div>
+
+        <div className="container mx-auto px-4 relative z-20">
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white/90 backdrop-blur-sm p-8 md:p-10 rounded-lg shadow-lg">
+              {/* Coming Soon Badge - Smaller and above headline */}
+              <div className="flex justify-center mb-2">
+                <div className="bg-[#FC6B57]/10 text-[#FC6B57] px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-1 border border-[#FC6B57]/20">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-3.5 w-3.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Coming Summer 2025
+                </div>
+              </div>
               <div className="text-center mb-6">
                 <h1 className="text-3xl md:text-5xl font-bold text-[#2F2F2F] mb-4">
                   Why search five sites when one will do?
@@ -62,69 +93,254 @@ const Home = () => {
                 </p>
               </div>
 
-              {/* Search Box */}
-              <div className="bg-white p-4 rounded-lg shadow-md mb-8">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <div className="flex-1">
-                    <select
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FC6B57]"
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                    >
-                      <option value="">Select Category</option>
-                      <option value="entertainers">Entertainers</option>
-                      <option value="venues">Venues</option>
-                      <option value="cakes">Cakes</option>
-                      <option value="decorations">Decorations</option>
-                    </select>
-                  </div>
-                  <div className="flex-1">
-                    <input
-                      type="text"
-                      placeholder="Enter Postcode"
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FC6B57]"
-                      value={postcode}
-                      onChange={(e) => setPostcode(e.target.value)}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex flex-col">
-                      <label className="text-sm text-[#707070] mb-1">Budget: £{budget}</label>
-                      <input
-                        type="range"
-                        min="50"
-                        max="500"
-                        step="10"
-                        value={budget}
-                        onChange={(e) => setBudget(Number.parseInt(e.target.value))}
-                        className="w-full accent-[#FC6B57]"
-                      />
-                    </div>
-                  </div>
-                  <button className="bg-[#FC6B57] text-white px-6 py-3 rounded-md hover:bg-[#e55c48] transition-colors">
-                    Search
+              {/* Mobile Toggle Between Customer and Supplier */}
+              <div className="md:hidden mb-6">
+                <div className="bg-gray-100 p-1 rounded-lg flex">
+                  <button
+                    className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                      activeTab === "customer"
+                        ? "bg-[#FC6B57] text-white"
+                        : "bg-transparent text-[#707070] hover:bg-gray-200"
+                    }`}
+                    onClick={() => setActiveTab("customer")}
+                  >
+                    For Customers
+                  </button>
+                  <button
+                    className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                      activeTab === "supplier"
+                        ? "bg-[#2F2F2F] text-white"
+                        : "bg-transparent text-[#707070] hover:bg-gray-200"
+                    }`}
+                    onClick={() => setActiveTab("supplier")}
+                  >
+                    For Suppliers
                   </button>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
+              {/* Registration Forms */}
+              <div className="hidden md:grid md:grid-cols-2 gap-6 mb-6">
+                {/* For Customers - Desktop */}
+                <div className="bg-[#FFF8F7] p-6 rounded-lg">
+                  <h3 className="text-xl font-semibold text-[#2F2F2F] mb-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2 text-[#FC6B57]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
+                    For Customers
+                  </h3>
+                  <p className="text-[#707070] mb-4">
+                    Be the first to know when we launch and find amazing party providers in your area.
+                  </p>
+                  {!registered ? (
+                    <form onSubmit={handleRegisterSubmit}>
+                      <div className="flex flex-col gap-3">
+                        <input
+                          type="email"
+                          placeholder="Your email address"
+                          className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FC6B57]"
+                          value={registerEmail}
+                          onChange={(e) => setRegisterEmail(e.target.value)}
+                          required
+                        />
+                        <button
+                          type="submit"
+                          className="bg-[#FC6B57] text-white px-4 py-3 rounded-md hover:bg-[#e55c48] transition-colors font-medium"
+                        >
+                          Register Interest
+                        </button>
+                      </div>
+                    </form>
+                  ) : (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-green-600 mx-auto mb-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-green-700 text-sm">Thank you! We'll notify you when BookABash launches.</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* For Suppliers - Desktop */}
+                <div className="bg-[#2F2F2F]/5 p-6 rounded-lg">
+                  <h3 className="text-xl font-semibold text-[#2F2F2F] mb-3 flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2 text-[#FC6B57]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                    For Suppliers
+                  </h3>
+                  <p className="text-[#707070] mb-4">
+                    List your party services on BookABash and reach more customers in your area.
+                  </p>
+                  <form>
+                    <div className="flex flex-col gap-3">
+                      <input
+                        type="email"
+                        placeholder="Your business email"
+                        className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FC6B57]"
+                      />
+                      <button
+                        type="submit"
+                        className="bg-[#2F2F2F] text-white px-4 py-3 rounded-md hover:bg-[#1F1F1F] transition-colors font-medium"
+                      >
+                        List With Us
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              {/* Mobile Forms - Show only active tab */}
+              <div className="md:hidden mb-6">
+                {/* For Customers - Mobile */}
+                {activeTab === "customer" && (
+                  <div className="bg-[#FFF8F7] p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold text-[#2F2F2F] mb-3 flex items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2 text-[#FC6B57]"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                      For Customers
+                    </h3>
+                    <p className="text-[#707070] mb-4">
+                      Be the first to know when we launch and find amazing party providers in your area.
+                    </p>
+                    {!registered ? (
+                      <form onSubmit={handleRegisterSubmit}>
+                        <div className="flex flex-col gap-3">
+                          <input
+                            type="email"
+                            placeholder="Your email address"
+                            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FC6B57]"
+                            value={registerEmail}
+                            onChange={(e) => setRegisterEmail(e.target.value)}
+                            required
+                          />
+                          <button
+                            type="submit"
+                            className="bg-[#FC6B57] text-white px-4 py-3 rounded-md hover:bg-[#e55c48] transition-colors font-medium"
+                          >
+                            Register Interest
+                          </button>
+                        </div>
+                      </form>
+                    ) : (
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-green-600 mx-auto mb-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <p className="text-green-700 text-sm">Thank you! We'll notify you when BookABash launches.</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* For Suppliers - Mobile */}
+                {activeTab === "supplier" && (
+                  <div className="bg-[#2F2F2F]/5 p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold text-[#2F2F2F] mb-3 flex items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2 text-[#FC6B57]"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                      For Suppliers
+                    </h3>
+                    <p className="text-[#707070] mb-4">
+                      List your party services on BookABash and reach more customers in your area.
+                    </p>
+                    <form>
+                      <div className="flex flex-col gap-3">
+                        <input
+                          type="email"
+                          placeholder="Your business email"
+                          className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FC6B57]"
+                        />
+                        <button
+                          type="submit"
+                          className="bg-[#2F2F2F] text-white px-4 py-3 rounded-md hover:bg-[#1F1F1F] transition-colors font-medium"
+                        >
+                          List With Us
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                )}
+              </div>
+
+              {/* Action Buttons */}
+              {/* <div className="flex flex-col md:flex-row justify-center gap-4">
                 <a
-                  href="#"
-                  className="bg-[#FC6B57] text-white px-6 py-3 rounded-full hover:bg-[#e55c48] transition-colors"
+                  href="#how-it-works"
+                  className="bg-[#FC6B57] text-white px-8 py-3 rounded-full hover:bg-[#e55c48] transition-colors text-center font-medium"
                 >
-                  Get Started
+                  How It Works
                 </a>
                 <a
-                  href="#"
-                  className="border border-[#FC6B57] text-[#FC6B57] px-6 py-3 rounded-full hover:bg-[#FC6B57] hover:text-white transition-colors"
+                  href="#categories"
+                  className="border border-[#FC6B57] text-[#FC6B57] px-8 py-3 rounded-full hover:bg-[#FC6B57]/10 transition-colors text-center font-medium"
                 >
                   Browse Categories
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </section>
+
 
       {/* How It Works */}
       <section className="py-20 relative overflow-hidden">

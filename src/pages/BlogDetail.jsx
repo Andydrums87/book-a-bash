@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { allPosts } from "../content/blogPost";
+import { Helmet } from 'react-helmet';
+import Seo from "../components/Seo";
 
 const BlogDetailPage = () => {
   const { id } = useParams();
@@ -17,6 +19,12 @@ const BlogDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FDFDFB]">
+         {/* Meta Tags for SEO */}
+         <Seo
+  title={post.metaTitle}
+  description={post.metaDescription}
+  image={post.image}
+/>
       {/* Breadcrumbs */}
       <div className="bg-white border-b border-gray-100 relative z-200">
         <div className="container mx-auto px-4 py-3">
@@ -36,7 +44,7 @@ const BlogDetailPage = () => {
         </div>
       </div>
 
-      {/* Blog Content */}
+      {/* Your existing content */}
       <div className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="mb-8">
           <span className="bg-[#FC6B57] text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -49,7 +57,9 @@ const BlogDetailPage = () => {
           </div>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-bold text-[#2F2F2F] mb-6">{post.title}</h1>
+        <h1 className="text-3xl md:text-5xl font-bold text-[#2F2F2F] mb-6">
+          {post.title}
+        </h1>
         <p className="text-xl text-[#707070] mb-6">{post.excerpt}</p>
 
         <div className="flex items-center mb-10">
@@ -64,7 +74,11 @@ const BlogDetailPage = () => {
           </div>
         </div>
 
-        <img src={post.image} alt={post.title} className="rounded-xl  shadow-lg mb-10" />
+        <img
+          src={post.image}
+          alt={post.title}
+          className="rounded-xl shadow-lg mb-10"
+        />
 
         <div
           className="prose prose-lg max-w-none mb-12"
